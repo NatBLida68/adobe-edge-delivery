@@ -1,34 +1,19 @@
-auto-generated: true
+version: 1
+
 indices:
-  main:
+  pages:
     include:
-      - /**
-    target: /query-index.json
+      - '/**'
+    exclude:
+      - '/drafts/**'
+    target: /site-index.json
     properties:
       title:
         select: head > meta[property="og:title"]
-        value: |
-          attribute(el, "content")
+        value: attribute(el, 'content')
       description:
         select: head > meta[name="description"]
-        value: |
-          attribute(el, "content")
-      date:
-        select: head > meta[name="publication-date"]
-        value: |
-          dateValue(attribute(el, 'content'), 'MM-DD-YYYY')
+        value: attribute(el, 'content')
       lastModified:
-        select: none
-        value: |
-          parseTimestamp(headers['last-modified'], 'ddd, DD MMM YYYY hh:mm:ss GMT')
-      image:
-        select: head > meta[property="og:image"]
-        value: |
-          match(attribute(el, "content"), "https:\/\/[^/]+(/.*)")
-      content:
-        select: main > div
-        values: characters(textContent(el), 0, 200)
-      tags:
-        select: head > meta[property="article:tag"]
-        values: |
-          attribute(el, 'content')
+        select: head > meta[property="article:modified_time"]
+        value: attribute(el, 'content')
